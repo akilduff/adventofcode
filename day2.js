@@ -200,7 +200,7 @@ var input = `1844
 1406`;
 
 
-var day1 = function (inputString, numOfnums) {
+var day2 = function (inputString, numOfNums) {
   let inputArray = [];
   let currentNum = '';
   for (let i = 0; i < inputString.length; i++) {
@@ -212,16 +212,15 @@ var day1 = function (inputString, numOfnums) {
     }
   }
   let finalProduct = 0;
-  for (let i = 0; i < inputArray.length; i++) {
-    for (let j = 0; j < inputArray.length; j++) {
-      let checkSum = inputArray[i] + inputArray[j];
-      if (i !== j && checkSum === 2020) {
-        console.log('Numbers: ', inputArray[i], inputArray[j])
-        finalProduct = inputArray[i] * inputArray[j];
-      }
+  let checkSum = 0;
+  var totalSumN = function (inputArray, numOfNums) {
+    for (let i = 0; i < inputArray.length; i++) {
+      let recurseArray = inputArray.splice(i, 1)
+      totalSumN(recurseArray, numOfNums)
     }
   }
+
   return finalProduct;
 }
 
-day1(input);
+day2(input);

@@ -200,7 +200,7 @@ var input = `1844
 1406`;
 
 
-var day1 = function (inputString) {
+var day1 = function (inputString, numOfnums) {
   let inputArray = [];
   let currentNum = '';
   for (let i = 0; i < inputString.length; i++) {

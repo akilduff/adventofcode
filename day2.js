@@ -997,7 +997,7 @@ var input = `17-19 p: pwpzpfbrcpppjppbmppp
 16-17 d: dddddddddddddddlp
 2-5 q: bbwqqbkmdhqmjhn
 7-10 m: qmpgmmsmmmmkmmkj
-4-7 g: vczggdgbgxgg`
+4-7 g: vczggdgbgxgg`;
 
 /* For example, suppose you have the following list:
 
@@ -1026,26 +1026,19 @@ var passwordCounter = function (inputString) {
       inputArray.push(currentInput);
   }
 
-  console.log(inputArray)
-
   let goodPasswords = 0;
   for (let j = 0; j < inputArray.length; j++) {
     let password = inputArray[j][2];
     let passLetter = inputArray[j][1];
-    let passIndex1 = inputArray[j][0][0] - 1;
-    let passIndex2 = inputArray[j][0][1] - 1;
-    let counter = 0;
-    if (password[passIndex1] === passLetter) {
-      counter++
+    let letterCounter = 0;
+    for (let k = 0; k < password.length; k++) {
+      if (password[k] === passLetter) {
+        letterCounter++;
+      }
     }
-    if (password[passIndex2] === passLetter) {
-      counter++
-    }
-    if (counter === 1) {
+    if (letterCounter >= inputArray[j][0][0] && letterCounter <= inputArray[j][0][1]) {
       goodPasswords++
     }
   }
   return goodPasswords
 }
-
-console.log(passwordCounter(input))

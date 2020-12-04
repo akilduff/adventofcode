@@ -999,3 +999,47 @@ var input = `17-19 p: pwpzpfbrcpppjppbmppp
 2-5 q: bbwqqbkmdhqmjhn
 7-10 m: qmpgmmsmmmmkmmkj
 4-7 g: vczggdgbgxgg`;
+
+/* For example, suppose you have the following list:
+
+1-3 a: abcde
+1-3 b: cdefg
+2-9 c: ccccccccc
+Each line gives the password policy and then the password. The password policy indicates the lowest and highest number of times a given letter must appear for the password to be valid. For example, 1-3 a means that the password must contain a at least 1 time and at most 3 times.
+
+In the above example, 2 passwords are valid. The middle password, cdefg, is not; it contains no instances of b, but needs at least 1. The first and third passwords are valid: they contain one a or nine c, both within the limits of their respective policies.
+
+How many passwords are valid according to their policies?
+*/
+
+var passwordCounter = function (inputString) {
+  let stringArray = inputString.split('\n');
+  let inputArray = [];
+  let currentEntry = '';
+  for (let i = 0; i < stringArray.length; i++) {
+    let currentEntry = stringArray[i]
+      let currentInput = currentEntry.split(' ');
+      let currentLimits = currentInput[0].split('-');
+      let currentMin = Number(currentLimits[0]);
+      let currentMax = Number(currentLimits[1]);
+      currentInput[0] = [currentMin, currentMax];
+      currentInput[1] = currentInput[1].slice(0,1);
+      inputArray.push(currentInput);
+  }
+
+  let goodPasswords = 0;
+  for (let j = 0; j < inputArray.length; j++) {
+    let password = inputArray[j][2];
+    let passLetter = inputArray[j][1];
+    let letterCounter = 0;
+    for (let k = 0; k < password.length; k++) {
+      if (password[k] === passLetter) {
+        letterCounter++;
+      }
+    }
+    if (letterCounter >= inputArray[j][0][0] && letterCounter <= inputArray[j][0][1]) {
+      goodPasswords++
+    }
+  }
+  return goodPasswords
+}
